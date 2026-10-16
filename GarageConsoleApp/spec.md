@@ -12,19 +12,18 @@ Garaget måste som minimum ha:
 ### Garage
 - Klassen behöver inte ärva från någon annan klass eller implementera någon annan interface
 - Använd ej `List<Vehicle>` internt i Garage-klassen
-- [ ] Samlingen av fordon ska internt i klassen hanteras som en privat array.
-- [ ] Vid instansieringen av ett nytt garage måste kapaciteten anges som argument till  
-    konstruktorn.
+- [x] Samlingen av fordon ska internt i klassen hanteras som en privat array.
+- [x] Vid instansieringen av ett nytt garage måste kapaciteten anges som argument till konstruktorn.
 ### Vehicle
-- [ ] Fordon ska implementeras som klassen Vehicle och subklasser till den
+- [x] Fordon ska implementeras som klassen Vehicle och subklasser till den
 - [ ] Vehicle innehåller samtliga egenskaper som ska finnas i samtliga fordonstyper. T.ex. registreringsnummer, färg, antal hjul, m.m.
     - [ ] Varje registreringsnummer är unikt
-- [ ] Det måste finnas följande subklasser:
-    - [ ] Car
-    - [ ] Motorcycle
-    - [ ] Bus
-    - [ ] Boat
-    - [ ] Airplane
+- [x] Det måste finnas följande subklasser:
+    - [x] Car
+    - [x] Motorcycle
+    - [x] Bus
+    - [x] Boat
+    - [x] Airplane
 - [ ] Varje subklass har minst en egen egenskap
 * * *
 ### Funktionalitet
