@@ -16,7 +16,7 @@ Garaget måste som minimum ha:
 - [x] Vid instansieringen av ett nytt garage måste kapaciteten anges som argument till konstruktorn.
 ### Vehicle
 - [x] Fordon ska implementeras som klassen Vehicle och subklasser till den
-- [ ] Vehicle innehåller samtliga egenskaper som ska finnas i samtliga fordonstyper. T.ex. registreringsnummer, färg, antal hjul, m.m.
+- [x] Vehicle innehåller samtliga egenskaper som ska finnas i samtliga fordonstyper. T.ex. registreringsnummer, färg, antal hjul, m.m.
     - [ ] Varje registreringsnummer är unikt
 - [x] Det måste finnas följande subklasser:
     - [x] Car
@@ -24,7 +24,7 @@ Garaget måste som minimum ha:
     - [x] Bus
     - [x] Boat
     - [x] Airplane
-- [ ] Varje subklass har minst en egen egenskap
+- [x] Varje subklass har minst en egen egenskap
 * * *
 ### Funktionalitet
 Det ska gå att
