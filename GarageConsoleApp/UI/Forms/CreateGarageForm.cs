@@ -1,6 +1,6 @@
 ﻿using static GarageConsoleApp.UI.ConsoleUI;
 
-namespace GarageConsoleApp.UI.Views
+namespace GarageConsoleApp.UI.Forms
 {
     internal static class CreateGarageForm
     {

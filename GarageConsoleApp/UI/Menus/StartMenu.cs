@@ -1,4 +1,4 @@
-﻿using GarageConsoleApp.UI.Views;
+﻿using GarageConsoleApp.UI.Forms;
 
 namespace GarageConsoleApp.UI.Menus
 {

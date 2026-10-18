@@ -2,7 +2,7 @@
 {
     internal class Boat : Vehicle
     {
-        private static readonly int DefaultSizeInUnits = ParkingUnits.FromSpaces(40);
+        private static readonly int DefaultSizeInUnits = ParkingUnits.FromSpaces(3);
         /// <summary> The length of the boat in meters </summary>
         public double Length { get; }
 
