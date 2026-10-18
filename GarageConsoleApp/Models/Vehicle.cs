@@ -2,16 +2,23 @@
 {
     internal abstract class Vehicle
     {
-        public string Model { get; }
         public string RegistrationNumber { get; }
+        public string Model { get; }
+        public string Color { get; }
         public int NumberOfWheels { get; }
 
+        /// <summary>
+        /// Space the vehicle needs, in thirds of a parking space (3 = one full space).
+        /// </summary>
+        public int SizeInUnits { get; }
 
-        protected Vehicle(string model, string registrationNumber, int numberOfWheels)
+        protected Vehicle(string registrationNumber, string model, string color, int numberOfWheels, int sizeInUnits)
         {
-            Model = model;
             RegistrationNumber = registrationNumber;
+            Color = color;
             NumberOfWheels = numberOfWheels;
+            Model = model;
+            SizeInUnits = sizeInUnits;
         }
     }
 }
