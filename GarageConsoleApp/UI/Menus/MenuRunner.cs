@@ -1,6 +1,6 @@
 ﻿using static GarageConsoleApp.UI.ConsoleUI;
 
-namespace GarageConsoleApp.UI
+namespace GarageConsoleApp.UI.Menus
 {
     internal static class MenuRunner
     {
@@ -28,8 +28,8 @@ namespace GarageConsoleApp.UI
 
                 for (int i = 0; i < items.Length; i++)
                 {
-                    if (i == lastIndex)
-                        Console.WriteLine(); // spacer before the exit item
+                    if (i == lastIndex) // spacer before the exit item
+                        Console.WriteLine();
 
                     Option(items[i].Label, i == selected);
                 }
@@ -39,7 +39,7 @@ namespace GarageConsoleApp.UI
                     case ConsoleKey.Enter:
                         if (selected != NoSelection)
                         {
-                            Console.CursorVisible = true; // views may read text input
+                            Console.CursorVisible = true;
                             Console.WriteLine();
                             items[selected].Action();
                         }

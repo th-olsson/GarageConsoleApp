@@ -1,12 +1,12 @@
 ﻿using static GarageConsoleApp.UI.ConsoleUI;
 
-namespace GarageConsoleApp.UI
+namespace GarageConsoleApp.UI.Menus
 {
-    internal static class MainMenu
+    internal static class GarageMenu
     {
-        internal static void Run()
+        internal static void Run(Garage garage)
         {
-            MenuRunner.Run("Garage Management System", "Exit",
+            MenuRunner.Run($"{garage.Name}", "Back to start",
                 ("Add Vehicle", () => { Text("This should run AddVehicleView..."); PressAnyKey(); }
             ),
                 ("Remove Vehicle", () => { Text("This should run RemoveVehicleView..."); PressAnyKey(); }

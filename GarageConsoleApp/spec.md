@@ -31,7 +31,7 @@ Det ska gå att
 - [ ] Lista samtliga parkerade fordon
 - [ ] Lista fordonstyper och hur många av varje som står i garaget
 - [ ] Lägga till och ta bort fordon ur garaget
-- [ ] Sätta en kapacitet (antal parkeringsplatser) vid instansieringen av ett nytt garage
+- [x] Sätta en kapacitet (antal parkeringsplatser) vid instansieringen av ett nytt garage
 - [ ] Möjlighet att populera (sätta in bilar i garaget med ett antal fordon från start)
 - [ ] Hitta ett specifikt fordon via registreringsnumret. Det ska fungera med både ABC123 samt Abc123 eller AbC123
 - [ ] Söka efter fordon utifrån en egenskap eller flera (alla möjliga kombinationer från basklassen Vehicle). Exempelvis:
@@ -47,8 +47,8 @@ Det ska gå att
 Programmet ska vara en konsolapplikation med ett textbaserat användargränssnitt.
 Från gränssnittet skall det gå att:
 - [ ] Navigera till **samtlig** funktionalitet från garage via gränssnittet
-- [ ] Skapa ett garage med en användar-specificerad storlek
-- [ ] Det ska gå att stänga av applikationen från gränssnittet
+- [x] Skapa ett garage med en användar-specificerad storlek
+- [x] Det ska gå att stänga av applikationen från gränssnittet
 
 Applikationen skall fel hantera indata på ett robust sätt, så att den inte kraschar vid felaktig  
 inmatning eller användning.
@@ -60,7 +60,7 @@ inmatning eller användning.
     Detta kommer medföra att man ska kunna manövrera sig mellan dom olika garagen i ui:t för  
     att kunna göra dom tidigare nämnda funktionerna de ska ske på bara det garaget som man  
     har för tillfället valt.
-- Det ska tydligt visas vilket garage man för närvarande arbetar med.
+- [x] Det ska tydligt visas vilket garage man för närvarande arbetar med.
 - Ett garage består inte längre av fordon utan av parkeringsplatser som i sin tur kan hålla  
     fordon.
 - Det går att via C# skriva och läsa till filsystemet från er applikation. Ta reda på hur man gör för  
