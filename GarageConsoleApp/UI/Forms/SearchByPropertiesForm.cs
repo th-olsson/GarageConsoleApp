@@ -9,21 +9,22 @@ namespace GarageConsoleApp.UI.Forms
 
         internal static void Run(Garage garage)
         {
-            Title("Search vehicles by properties");
-            Text("Leave a field empty to skip it. Everything you fill in must match.");
+            Title("Search vehicles");
+            Text("Tell us what you are looking for. Only vehicles that match everything you enter are shown.");
             Console.WriteLine();
 
-            for (int i = 0; i < TypeNames.Length; i++)
-                Text($"{i + 1}. {TypeNames[i]}");
+            // The first option means "no type filter", the rest are the vehicle types
+            string[] typeOptions = ["Any type", .. TypeNames];
+            int typeChoice = Choose("What type of vehicle?", typeOptions);
 
-            int? typeChoice = ReadOptionalInt("Type (number): ", 1, TypeNames.Length);
-            string? color = ReadOptionalString("Color: ");
-            int? wheels = ReadOptionalInt("Number of wheels: ", 0, 100);
-            string? model = ReadOptionalString("Model (part of the name): ");
+            Console.WriteLine();
+            string? color = ReadOptionalString("Color, e.g. Black (press Enter to skip): ");
+            int? wheels = ReadOptionalInt("Number of wheels (press Enter to skip): ", 0, 100);
+            string? model = ReadOptionalString("Model or part of the name, e.g. Volvo (press Enter to skip): ");
 
             var filter = new VehicleFilter
             {
-                TypeName = typeChoice == null ? null : TypeNames[typeChoice.Value - 1],
+                TypeName = typeChoice == 0 ? null : TypeNames[typeChoice - 1],
                 Color = color,
                 NumberOfWheels = wheels,
                 Model = model
@@ -33,7 +34,7 @@ namespace GarageConsoleApp.UI.Forms
 
             if (filter.IsEmpty)
             {
-                ErrorText("You did not fill in anything to search for.");
+                ErrorText("Nothing to search for. Pick a type or fill in at least one field next time.");
             }
             else
             {
@@ -41,13 +42,13 @@ namespace GarageConsoleApp.UI.Forms
 
                 if (matches.Length == 0)
                 {
-                    Text("No parked vehicles match.");
+                    Text("No parked vehicles match your search.");
                 }
                 else
                 {
                     VehicleTable.Print(matches);
                     Console.WriteLine();
-                    Text($"{matches.Length} vehicle(s) found.");
+                    Text(matches.Length == 1 ? "Found 1 vehicle." : $"Found {matches.Length} vehicles.");
                 }
             }
 

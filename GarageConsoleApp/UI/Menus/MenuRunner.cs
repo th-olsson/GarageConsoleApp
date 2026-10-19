@@ -4,53 +4,24 @@ namespace GarageConsoleApp.UI.Menus
 {
     internal static class MenuRunner
     {
-        private const int NoSelection = -1;
-        private const string HelpText = "(Use Arrow keys to navigate up and down and Enter to select)";
-
         internal static void Run(string title, string exitLabel,
             params (string Label, Action Action)[] options)
         {
-            bool running = true;
-            var items = options.Append((exitLabel, () => running = false)).ToArray();
-            int lastIndex = items.Length - 1;
-            int selected = NoSelection;
+            // The exit option is always last, after the options the caller gave
+            string[] labels = options.Select(option => option.Label).Append(exitLabel).ToArray();
+            int exitIndex = options.Length;
+            int selected = 0;
 
-            while (running)
+            while (true)
             {
-                Console.CursorVisible = false;
-
                 Title(title);
-                if (selected == NoSelection)
-                    HighlightedText(HelpText, withArrow: false);
-                else
-                    Text(HelpText);
+                selected = Choose(null, labels, selected, separateLast: true);
+
+                if (selected == exitIndex)
+                    return;
+
                 Console.WriteLine();
-
-                for (int i = 0; i < items.Length; i++)
-                {
-                    if (i == lastIndex) // spacer before the exit item
-                        Console.WriteLine();
-
-                    Option(items[i].Label, i == selected);
-                }
-
-                switch (Console.ReadKey().Key)
-                {
-                    case ConsoleKey.Enter:
-                        if (selected != NoSelection)
-                        {
-                            Console.CursorVisible = true;
-                            Console.WriteLine();
-                            items[selected].Action();
-                        }
-                        break;
-                    case ConsoleKey.DownArrow:
-                        selected = selected == lastIndex ? 0 : selected + 1;
-                        break;
-                    case ConsoleKey.UpArrow:
-                        selected = selected <= 0 ? lastIndex : selected - 1;
-                        break;
-                }
+                options[selected].Action();
             }
         }
     }

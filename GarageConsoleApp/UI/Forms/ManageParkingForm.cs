@@ -102,8 +102,8 @@ namespace GarageConsoleApp.UI.Forms
             string box = isChecked ? "[x]" : "[ ]";
             string status = (isChecked, isParked) switch
             {
-                (true, false) => "to park",
-                (false, true) => "to leave",
+                (true, false) => "park",
+                (false, true) => "leave",
                 (true, true) => "parked",
                 _ => ""
             };

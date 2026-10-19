@@ -4,12 +4,18 @@
     {
         internal static void Title(string text)
         {
+            string line = new string('─', text.Length + 2);
+
             Console.Clear();
-            Console.WriteLine($"=== {text} ===");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"   ┌{line}┐");
+            Console.WriteLine($"   │ {text} │");
+            Console.WriteLine($"   └{line}┘");
+            Console.ResetColor();
             Console.WriteLine();
         }
-
         internal static void Text(string text) => Console.WriteLine($"    {text}");
+        internal static void TextInline(string text) => Console.Write($"    {text}");
         internal static void HighlightedText(string text, bool withArrow = true)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -19,20 +25,36 @@
                 Text(text);
             Console.ResetColor();
         }
+        internal static void HintText(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Text(text);
+            Console.ResetColor();
+        }
         internal static void ErrorText(string text)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Text(text);
             Console.ResetColor();
         }
-        internal static int Choose(string prompt, params string[] options)
+
+        private const string HelpText = "Use the arrow keys to choose, then press Enter.";
+        /// <summary>
+        /// Lets the user pick one option with the arrow keys. Returns the index of the chosen option.
+        /// </summary>
+        internal static int Choose(string? prompt, string[] options, int initialIndex = 0, bool separateLast = false)
         {
-            Text(prompt);
-            Text("(Use Arrow keys to navigate up and down and Enter to select)");
+            if (prompt != null)
+            {
+                Text(prompt);
+                Console.WriteLine();
+            }
+            HintText(HelpText);
             Console.WriteLine();
             Console.CursorVisible = false;
 
-            int selected = 0;
+            int selected = initialIndex;
+            int rows = options.Length + (separateLast ? 1 : 0);
             int top = -1; // first row of the option list, known after the first draw
 
             while (true)
@@ -41,11 +63,15 @@
                     Console.SetCursorPosition(0, top);
 
                 for (int i = 0; i < options.Length; i++)
-                    Option(options[i], i == selected);
+                {
+                    if (separateLast && i == options.Length - 1)
+                        Console.WriteLine(); // spacer before the last option
 
-                // Calculated after drawing, so it is still right if the window scrolled
+                    Option(options[i], i == selected);
+                }
+
                 if (top == -1)
-                    top = Console.CursorTop - options.Length;
+                    top = Console.CursorTop - rows;
 
                 switch (Console.ReadKey(true).Key)
                 {
@@ -74,25 +100,12 @@
             Text("Press any key to continue...");
             Console.ReadKey();
         }
-        internal static int ReadInt(string prompt, int min, int max)
-        {
-            while (true)
-            {
-                Console.CursorVisible = true;
-                Console.Write($"    {prompt}");
-
-                if (int.TryParse(Console.ReadLine(), out int value) && value >= min && value <= max)
-                    return value;
-
-                ErrorText($"Please enter a whole number between {min} and {max}.");
-            }
-        }
         internal static string ReadString(string prompt)
         {
             while (true)
             {
                 Console.CursorVisible = true;
-                Console.Write($"    {prompt}");
+                TextInline(prompt);
                 string? input = Console.ReadLine();
 
                 if (!string.IsNullOrWhiteSpace(input))
@@ -104,27 +117,71 @@
         internal static string? ReadOptionalString(string prompt)
         {
             Console.CursorVisible = true;
-            Console.Write(prompt);
+            TextInline(prompt);
             string? input = Console.ReadLine();
 
             return string.IsNullOrWhiteSpace(input) ? null : input.Trim();
         }
-        internal static int? ReadOptionalInt(string prompt, int min, int max)
+
+        internal static int ReadInt(string prompt, int min = int.MinValue, int max = int.MaxValue)
         {
             while (true)
             {
                 Console.CursorVisible = true;
-                Console.Write(prompt);
+                TextInline(prompt);
+
+                if (!int.TryParse(Console.ReadLine(), out int value))
+                {
+                    ErrorText("That is not a whole number. Please try again.");
+                    continue;
+                }
+
+                if (value < min || value > max)
+                {
+                    ErrorText($"Please enter {DescribeRange(min, max)}.");
+                    continue;
+                }
+
+                return value;
+            }
+        }
+        internal static int? ReadOptionalInt(string prompt, int min = int.MinValue, int max = int.MaxValue)
+        {
+            while (true)
+            {
+                Console.CursorVisible = true;
+                TextInline(prompt);
                 string? input = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(input))
                     return null;
 
-                if (int.TryParse(input, out int value) && value >= min && value <= max)
-                    return value;
+                if (!int.TryParse(input, out int value))
+                {
+                    ErrorText("That is not a whole number. Try again, or press Enter to skip.");
+                    continue;
+                }
 
-                Console.WriteLine($"Please enter a whole number between {min} and {max}, or leave empty to skip.");
+                if (value < min || value > max)
+                {
+                    ErrorText($"Please enter {DescribeRange(min, max)}, or press Enter to skip.");
+                    continue;
+                }
+
+                return value;
             }
+        }
+        // Describes only the limits that exist, so "no maximum" never shows up as a huge number
+        private static string DescribeRange(int min, int max)
+        {
+            if (min != int.MinValue && max != int.MaxValue)
+                return $"a number from {min} to {max}";
+            if (min != int.MinValue)
+                return $"a number that is {min} or more";
+            if (max != int.MaxValue)
+                return $"a number that is {max} or less";
+
+            return "a whole number";
         }
     }
 }
