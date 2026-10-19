@@ -58,6 +58,25 @@ namespace GarageConsoleApp
             _vehicles[slot] = vehicle;
             return ParkResult.Parked;
         }
+        public Vehicle[] GetParkedVehicles()
+        {
+            int count = 0;
+            foreach (Vehicle? vehicle in _vehicles)
+            {
+                if (vehicle != null)
+                    count++;
+            }
+
+            Vehicle[] parked = new Vehicle[count];
+            int next = 0;
+            foreach (Vehicle? vehicle in _vehicles)
+            {
+                if (vehicle != null)
+                    parked[next++] = vehicle;
+            }
+
+            return parked;
+        }
         private int FindFreeSlot()
         {
             for (int i = 0; i < _vehicles.Length; i++)
