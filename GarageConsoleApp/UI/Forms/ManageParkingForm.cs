@@ -12,6 +12,8 @@ namespace GarageConsoleApp.UI.Forms
             for (int i = 0; i < vehicles.Length; i++)
                 isChecked[i] = garage.IsParked(vehicles[i].RegistrationNumber);
 
+            string[] tableLines = BuildTable(vehicles);
+
             int selected = 0;
             bool running = true;
             Console.CursorVisible = false;
@@ -25,10 +27,10 @@ namespace GarageConsoleApp.UI.Forms
                 Text("Up/Down: move   Spacebar: check/uncheck   Enter: apply   Esc: cancel");
                 Console.WriteLine();
 
-                Text($"    {"Reg",-7} {"Model",-26} {"Type",-11} {"Space",6}");
+                Text($"    {tableLines[0]}"); // 4 spaces = width of "[x] "
                 for (int i = 0; i < vehicles.Length; i++)
                 {
-                    string row = FormatRow(vehicles[i], isChecked[i], garage.IsParked(vehicles[i].RegistrationNumber));
+                    string row = FormatRow(tableLines[i + 1], isChecked[i], garage.IsParked(vehicles[i].RegistrationNumber));
 
                     if (i == selected)
                         HighlightedText(row);
@@ -76,7 +78,26 @@ namespace GarageConsoleApp.UI.Forms
             Console.CursorVisible = true;
         }
 
-        private static string FormatRow(Vehicle vehicle, bool isChecked, bool isParked)
+        private static string[] BuildTable(Vehicle[] vehicles)
+        {
+            string[][] rows = new string[vehicles.Length][];
+            for (int i = 0; i < vehicles.Length; i++)
+            {
+                Vehicle vehicle = vehicles[i];
+                rows[i] =
+                [
+                    vehicle.RegistrationNumber,
+                    vehicle.Model,
+                    vehicle.TypeName,
+                    ParkingUnits.Format(vehicle.SizeInUnits)
+                ];
+            }
+
+            // Column 3 (Space) is right-aligned
+            return Table.Format(["Reg", "Model", "Type", "Space"], rows, 3);
+        }
+
+        private static string FormatRow(string tableLine, bool isChecked, bool isParked)
         {
             string box = isChecked ? "[x]" : "[ ]";
             string status = (isChecked, isParked) switch
@@ -87,7 +108,7 @@ namespace GarageConsoleApp.UI.Forms
                 _ => ""
             };
 
-            return $"{box} {vehicle.RegistrationNumber,-7} {vehicle.Model,-26} {vehicle.TypeName,-11} {ParkingUnits.Format(vehicle.SizeInUnits),6}  {status}";
+            return $"{box} {tableLine}  {status}";
         }
 
         private static int CountCheckedUnits(Vehicle[] vehicles, bool[] isChecked)
