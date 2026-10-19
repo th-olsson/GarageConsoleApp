@@ -7,14 +7,30 @@ namespace GarageConsoleApp.UI.Menus
     {
         internal static void Run()
         {
-            MenuRunner.Run("Garage Manager", "Exit",
-                ("Create garage", () =>
+            // Kept in memory when going back to this menu. Null until the garage is created.
+            Garage? garage = null;
+            Vehicle[] vehicles = [];
+
+            MenuRunner.Run("Garage Manager", "Exit", () =>
+            [
+                // Creates the garage the first time, then opens it
+                (GarageLabel(garage), () =>
                 {
-                    Vehicle[] vehicles = VehicleRegistry.CreateSeed();
-                    Garage garage = CreateGarageForm.Run(vehicles);
+                    if (garage == null)
+                    {
+                        vehicles = VehicleRegistry.CreateSeed();
+                        garage = CreateGarageForm.Run(vehicles);
+                    }
+
                     GarageMenu.Run(garage, vehicles);
-                }
-            ));
+                })
+            ]);
         }
+
+        // Text for the garage option: "Create garage" if none exists, otherwise its name and occupancy
+        private static string GarageLabel(Garage? garage) =>
+            garage == null
+                ? "Create garage"
+                : $"{garage.Name} ({ParkingUnits.Format(garage.UsedUnits)} of {garage.Capacity} parking spaces used)";
     }
 }
