@@ -1,4 +1,5 @@
-﻿using GarageConsoleApp.UI.Menus;
+﻿using GarageConsoleApp.Models;
+using GarageConsoleApp.UI.Menus;
 
 namespace GarageConsoleApp
 {

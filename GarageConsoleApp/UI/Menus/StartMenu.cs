@@ -1,4 +1,5 @@
-﻿using GarageConsoleApp.UI.Forms;
+﻿using GarageConsoleApp.Models;
+using GarageConsoleApp.UI.Forms;
 
 namespace GarageConsoleApp.UI.Menus
 {
@@ -10,7 +11,8 @@ namespace GarageConsoleApp.UI.Menus
                 ("Create garage", () =>
                 {
                     Garage garage = CreateGarageForm.Run();
-                    GarageMenu.Run(garage);
+                    Vehicle[] vehicles = VehicleRegistry.CreateSeed();
+                    GarageMenu.Run(garage, vehicles);
                 }
             ));
         }

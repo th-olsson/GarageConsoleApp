@@ -10,10 +10,9 @@ namespace GarageConsoleApp.UI.Forms
         {
             Title("Create garage");
             string name = ReadString("Garage name: ");
-            int capacity = ReadInt($"How many parking spots do you want? ({MinCapacity}-{MaxCapacity}): ", MinCapacity, MaxCapacity);
-
+            int capacity = ReadInt($"How many parking spaces do you want? ({MinCapacity}-{MaxCapacity}): ", MinCapacity, MaxCapacity);
             Console.WriteLine();
-            Text($"Garage \"{name}\" created with {capacity} spots.");
+            Text($"Garage \"{name}\" created with {capacity} parking spaces.");
             PressAnyKey();
 
 
