@@ -10,8 +10,8 @@ namespace GarageConsoleApp.UI.Menus
             MenuRunner.Run("Garage Manager", "Exit",
                 ("Create garage", () =>
                 {
-                    Garage garage = CreateGarageForm.Run();
                     Vehicle[] vehicles = VehicleRegistry.CreateSeed();
+                    Garage garage = CreateGarageForm.Run(vehicles);
                     GarageMenu.Run(garage, vehicles);
                 }
             ));
