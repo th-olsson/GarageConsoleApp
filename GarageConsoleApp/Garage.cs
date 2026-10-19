@@ -89,6 +89,11 @@ namespace GarageConsoleApp
 
             return result;
         }
+        public Vehicle? Find(string registrationNumber)
+        {
+            int index = FindIndex(registrationNumber);
+            return index == -1 ? null : _vehicles[index];
+        }
         private int FindFreeSlot()
         {
             for (int i = 0; i < _vehicles.Length; i++)
