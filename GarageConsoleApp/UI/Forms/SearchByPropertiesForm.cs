@@ -18,9 +18,9 @@ namespace GarageConsoleApp.UI.Forms
             int typeChoice = Choose("What type of vehicle?", typeOptions);
 
             Console.WriteLine();
-            string? color = ReadOptionalString("Color, e.g. Black (press Enter to skip): ");
-            int? wheels = ReadOptionalInt("Number of wheels (press Enter to skip): ", 0, 100);
-            string? model = ReadOptionalString("Model or part of the name, e.g. Volvo (press Enter to skip): ");
+            string? color = ReadOptionalString("Color, e.g. Black (leave blank to skip): ");
+            int? wheels = ReadOptionalInt("Number of wheels (leave blank to skip): ", 0, 100);
+            string? model = ReadOptionalString("Model or part of the name, e.g. Volvo (leave blank to skip): ");
 
             var filter = new VehicleFilter
             {

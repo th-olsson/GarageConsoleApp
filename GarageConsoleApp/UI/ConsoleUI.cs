@@ -158,13 +158,13 @@
 
                 if (!int.TryParse(input, out int value))
                 {
-                    ErrorText("That is not a whole number. Try again, or press Enter to skip.");
+                    ErrorText("That is not a whole number. Try again.");
                     continue;
                 }
 
                 if (value < min || value > max)
                 {
-                    ErrorText($"Please enter {DescribeRange(min, max)}, or press Enter to skip.");
+                    ErrorText($"Please enter {DescribeRange(min, max)}.");
                     continue;
                 }
 

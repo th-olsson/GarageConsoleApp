@@ -28,7 +28,7 @@ namespace GarageConsoleApp
                 new Bus("BUS003", "Mercedes-Benz Sprinter", "White", numberOfSeats: 19, numberOfWheels: 4,
                     sizeInUnits: ParkingUnits.FromSpaces(2)),
 
-                // Boats (default: 40 spaces)
+                // Boats (default: 3 spaces)
                 new Boat("BOT001", "Nimbus 305", "White", length: 9.5),
                 new Boat("BOT002", "Buster XL", "Gray", length: 5.7, sizeInUnits: ParkingUnits.FromSpaces(2)),
                 new Boat("BOT003", "Sunseeker Predator 50", "Red", length: 15.2, sizeInUnits: ParkingUnits.FromSpaces(6)),
