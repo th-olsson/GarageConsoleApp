@@ -4,9 +4,8 @@ namespace GarageConsoleApp
 {
     internal class Garage
     {
-        // One entry per parked vehicle. The length is the most vehicles that could ever fit
-        // (every vehicle takes at least one unit), while the real limit is the total units.
         private readonly Vehicle?[] _vehicles;
+        private static readonly string[] _typeNames = ["Car", "Motorcycle", "Bus", "Boat", "Airplane"];
         public string Name { get; }
         /// <summary>The number of parking spaces.</summary>
         public int Capacity { get; }
@@ -76,6 +75,19 @@ namespace GarageConsoleApp
             }
 
             return parked;
+        }
+        public (string TypeName, int Count)[] CountByType()
+        {
+            Vehicle[] parked = GetParkedVehicles();
+            var result = new (string TypeName, int Count)[_typeNames.Length];
+
+            for (int i = 0; i < _typeNames.Length; i++)
+            {
+                string name = _typeNames[i];
+                result[i] = (name, Array.FindAll(parked, v => v.TypeName == name).Length);
+            }
+
+            return result;
         }
         private int FindFreeSlot()
         {

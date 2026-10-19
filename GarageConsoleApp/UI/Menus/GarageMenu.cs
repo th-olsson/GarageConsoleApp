@@ -10,7 +10,8 @@ namespace GarageConsoleApp.UI.Menus
         {
             MenuRunner.Run(garage.Name, "Back to start",
                 ("Manage parking", () => ManageParkingForm.Run(garage, vehicles)),
-                ("List Vehicles", () => ListVehiclesView.Run(garage))
+                ("List Vehicles", () => ListVehiclesView.Run(garage)),
+                ("Vehicle types", () => TypeCountView.Run(garage))
             );
         }
     }
