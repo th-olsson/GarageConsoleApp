@@ -94,6 +94,7 @@ namespace GarageConsoleApp
             int index = FindIndex(registrationNumber);
             return index == -1 ? null : _vehicles[index];
         }
+        public Vehicle[] Search(VehicleFilter filter) => Array.FindAll(GetParkedVehicles(), filter.Matches);
         private int FindFreeSlot()
         {
             for (int i = 0; i < _vehicles.Length; i++)
