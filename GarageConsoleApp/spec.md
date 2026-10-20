@@ -66,7 +66,7 @@ inmatning eller användning.
 - Det går att via C# skriva och läsa till filsystemet från er applikation. Ta reda på hur man gör för  
     att kunna spara ert garage (via meny eller automatiskt vid avstängning) och ladda in ert garage  
     (via meny eller automatiskt vid start av applikationen)
-- Olika fordon tar olika stor plats tex en bil tar 1 plats en båt tar 2 platser ett flygplan kräver 3  
+- [x] Olika fordon tar olika stor plats tex en bil tar 1 plats en båt tar 2 platser ett flygplan kräver 3  
     platser osv en motorcykel tar endast 1/3 dels plats.
 - När man parkerar ska endast de fordon som garaget har plats för visas som alternativ.
 - Läsa in storleken på garaget via konfiguration
